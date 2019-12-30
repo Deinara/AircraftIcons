@@ -1,6 +1,6 @@
 # AircraftIcons
 
-A repository containing SVG images depicting aircraft.
+A repository containing SVG drawings depicting aircraft.
 
 
 ### Contributions welcome!
