@@ -7,5 +7,5 @@ A repository containing SVG drawings depicting aircraft.
 * The canvas used is 250x100mm. Please keep the aspect ratio the same.
 * Please use the aircraft codes as specified in the ICAO8643 document as filename convention.
 * Depict the aircraft from the side, as if they were parked/taxiing, i.e. with the gear extended.
-* The nose the depicted aircraft should point left.
+* The nose of the depicted aircraft should point left.
 * Please don't use copyrighted work.
