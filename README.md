@@ -1,4 +1,4 @@
-# AircraftIcons
+# AircraftIcons <img src="./icon.svg" width="35">
 
 A repository containing SVG drawings depicting aircraft.
 
