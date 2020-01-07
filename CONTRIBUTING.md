@@ -17,6 +17,7 @@ Please follow the contribution guidelines below:
 * Depict the aircraft from the side, as if they were parked/taxiing, i.e. with the gear extended.
 * The nose of the depicted aircraft should point left.
 * Aircraft are not to scale compared to each other. 
+* The main focus lies on commercial and general aviation aircraft, but military aircraft can be added too.
 * Run your svg file through an svg optimizer, and please ensure the image looks the same afterwards.
 * Please don't use copyrighted work.
 * Where feasible, please create a pull request for one aircraft (range) at a time, e.g. B732 - B739.
