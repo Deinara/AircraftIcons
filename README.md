@@ -4,11 +4,11 @@ A repository containing SVG drawings depicting aircraft.
 
 
 ### Contributions welcome!
-* The canvas used is 250x100mm. Please keep the size/aspect ratio the same.
-* Please use the aircraft codes as specified in the ICAO8643 document as filename convention.
-* Depict the aircraft from the side, as if they were parked/taxiing, i.e. with the gear extended.
-* The nose of the depicted aircraft should point left.
-* Please don't use copyrighted work.
+Please see the contribution guidelines if you want to help out.
 
+Please create an issue if you would request an aircraft type to be added.
+
+### A few examples:
+<img src="./b06.svg" width="150"><img src="./js41.svg" width="150"><img src="./h269.svg" width="150"><img src="./toba.svg" width="150">
 
 <img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" height="25">
