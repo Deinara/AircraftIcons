@@ -13,6 +13,9 @@ steps:
   - npm install gh-badges
   - npm run -s env -- icon-font-generator ./*/*.svg -o web -n AircraftIcons
   - npm run -s env -- badge icons $$NUMICONS :green svg > web/numicons.svg
+  when:
+    event:
+    - push
 
 - name: Write preview files
   image: eeacms/rsync
@@ -29,3 +32,6 @@ steps:
   - find ./web/ -type f -exec chmod 644 {} \;
   - find ./web/ -type d -exec chmod 755 {} \;
   - rsync -rpP --delete --delete-excluded ./web/ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/AircraftIcons/$$DRONE_BRANCH/
+  when:
+    event:
+    - push
