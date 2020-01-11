@@ -1,0 +1,37 @@
+kind: pipeline
+name: default
+
+steps:
+- name: Generate preview page and badge
+  image: node
+  commands:
+  - NUMICONS=$(find .//./*/*.svg -name 'Supporting' -o -name '.git' -prune -o -print | grep -c //) && export NUMICONS
+  - echo "Icons found $$NUMICONS"
+  - mkdir web
+  - npm init --force
+  - npm install icon-font-generator
+  - npm install gh-badges
+  - npm run -s env -- icon-font-generator ./*/*.svg -o web -n AircraftIcons
+  - npm run -s env -- badge icons $$NUMICONS :green svg > web/numicons.svg
+  when:
+    event:
+    - push
+
+- name: Write preview files
+  image: eeacms/rsync
+  environment:
+    RSYNC_URL:
+      from_secret: rsync_url
+    RSYNC_PORT:
+      from_secret: rsync_port
+    RSYNC_USER:
+      from_secret: rsync_user
+    RSYNC_PASSWORD:
+      from_secret: rsync_password
+  commands:
+  - find ./web/ -type f -exec chmod 644 {} \;
+  - find ./web/ -type d -exec chmod 755 {} \;
+  - rsync -rpP --delete --delete-excluded ./web/ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/AircraftIcons/$$DRONE_BRANCH/
+  when:
+    event:
+    - push
