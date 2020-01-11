@@ -5,13 +5,14 @@ steps:
 - name: Generate preview
   image: node
   commands:
-  - find .//. -name 'Supporting' -prune -o -print | grep -c // 
+  - NUMICONS=$(find .//./*/*.svg -name 'Supporting' -o -name '.git' -prune -o -print | grep -c //) && export NUMICONS
+  - echo 'Icons found: $$NUMICONS'
   - mkdir web
   - npm init --force
   - npm install icon-font-generator
   - npm install gh-badges
   - npm run env -- icon-font-generator ./*/*.svg -o web
-  - npm run --loglevel=silent env -- badge icons 88 :green svg > web/numicons.svg
+  - npm run --loglevel=silent env -- badge icons $$NUMICONS :green svg > web/numicons.svg
 
 - name: Write preview files
   image: eeacms/rsync
