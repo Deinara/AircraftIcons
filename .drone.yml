@@ -5,6 +5,7 @@ steps:
 - name: Generate preview
   image: node
   commands:
+  - mkdir web
   - npm init --force
   - npm install icon-font-generator
   - npm install gh-badges
