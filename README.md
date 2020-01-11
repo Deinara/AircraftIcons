@@ -1,5 +1,5 @@
 # AircraftIcons <img src="./icon.svg" width="35">
-[![Build Status](https://drone.deinara.nl/api/badges/Deinara/AircraftIcons/status.svg)](https://drone.deinara.nl/Deinara/AircraftIcons)[![Icon count](https://drone.deinara.nl/web/AircraftIcons/master/numicons.svg)](https://drone.deinara.nl/web/AircraftIcons/master/AircraftIcons.html)
+[![Build Status](https://drone.deinara.nl/api/badges/Deinara/AircraftIcons/status.svg)](https://drone.deinara.nl/Deinara/AircraftIcons)    [![Icon count](https://drone.deinara.nl/web/AircraftIcons/master/numicons.svg)](https://drone.deinara.nl/web/AircraftIcons/master/AircraftIcons.html)
 
 A repository containing SVG drawings depicting aircraft.
 
