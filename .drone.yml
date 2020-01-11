@@ -11,8 +11,8 @@ steps:
   - npm init --force
   - npm install icon-font-generator
   - npm install gh-badges
-  - npm run env -- icon-font-generator ./*/*.svg -o web
-  - npm run env -- badge icons $$NUMICONS :green svg | tee web/numicons.svg
+  - npm run -s env -- icon-font-generator ./*/*.svg -o web -n AircraftIcons
+  - npm run -s env -- badge icons $$NUMICONS :green svg > web/numicons.svg
 
 - name: Write preview files
   image: eeacms/rsync
