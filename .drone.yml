@@ -6,7 +6,7 @@ steps:
   image: node
   commands:
   - NUMICONS=$(find .//./*/*.svg -name 'Supporting' -o -name '.git' -prune -o -print | grep -c //) && export NUMICONS
-  - echo 'Icons found: $$NUMICONS'
+  - echo "Icons found $$NUMICONS"
   - mkdir web
   - npm init --force
   - npm install icon-font-generator
