@@ -5,7 +5,7 @@ steps:
 - name: Generate preview
   image: node
   commands:
-  - npm init
+  - npm init --force
   - npm install icon-font-generator
   - npm install gh-badges
   - npm run env -- icon-font-generator ./*.svg -o web
