@@ -6,7 +6,9 @@ steps:
   image: node
   commands:
   - npm install icon-font-generator
-  - npm run icon-font-generator ./*.svg -o web
+  - npm install gh-badges
+  - npm run env -- icon-font-generator ./*.svg -o web
+  - npm run env -- badge icons 88 :green .png > web/numicons.png
 
 - name: Write preview files
   image: eeacms/rsync
