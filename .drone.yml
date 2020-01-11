@@ -9,8 +9,8 @@ steps:
   - npm init --force
   - npm install icon-font-generator
   - npm install gh-badges
-  - npm run env -- icon-font-generator ./**.svg -o web
-  - npm run env -- badge icons 88 :green .png > web/numicons.png
+  - npm run env -- icon-font-generator **.svg -o web
+  - npm run env -- badge icons 88 :green svg > web/numicons.svg
 
 - name: Write preview files
   image: eeacms/rsync
@@ -26,4 +26,4 @@ steps:
   commands:
   - find ./web/ -type f -exec chmod 644 {} \;
   - find ./web/ -type d -exec chmod 755 {} \;
-  - rsync -rpP --delete --delete-excluded ./web/ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/$$DRONE_COMMIT/
+  - rsync -rpP --delete --delete-excluded ./web/ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/$$DRONE_BRANCH/
