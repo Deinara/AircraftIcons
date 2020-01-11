@@ -12,7 +12,7 @@ steps:
   - npm install icon-font-generator
   - npm install gh-badges
   - npm run env -- icon-font-generator ./*/*.svg -o web
-  - npm run --loglevel=silent env -- badge icons $NUMICONS :green svg > web/numicons.svg
+  - NUMS=$$NUMICONS npm run env -- badge icons $NUMS :green svg > web/numicons.svg
 
 - name: Write preview files
   image: eeacms/rsync
