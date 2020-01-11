@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 steps:
-- name: Generate preview
+- name: Generate preview page and badge
   image: node
   commands:
   - NUMICONS=$(find .//./*/*.svg -name 'Supporting' -o -name '.git' -prune -o -print | grep -c //) && export NUMICONS
@@ -28,4 +28,4 @@ steps:
   commands:
   - find ./web/ -type f -exec chmod 644 {} \;
   - find ./web/ -type d -exec chmod 755 {} \;
-  - rsync -rpP --delete --delete-excluded ./web/ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/$$DRONE_BRANCH/
+  - rsync -rpP --delete --delete-excluded ./web/ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/$$DRONE_REPO/$$DRONE_BRANCH/
