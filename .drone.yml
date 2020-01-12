@@ -9,7 +9,7 @@ steps:
   - mkdir minified
   - npm init --force
   - npm install svgo
-  - npm run -s env -- svgo -f ./ -r -o ./minified
+  - npm run -s env -- svgo -f ./ -r -o ./minified --disable=cleanupAttrs,removeDoctype,removeXMLProcInst,removeMetadata
 
 - name: Generate preview page and badge
   image: node
@@ -40,6 +40,7 @@ steps:
   commands:
   - find ./web/ -type f -exec chmod 644 {} \;
   - find ./web/ -type d -exec chmod 755 {} \;
+  #./web/ here
   - rsync -rpP --delete --delete-excluded ./ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/AircraftIcons/$$DRONE_BRANCH/
   when:
     event:
