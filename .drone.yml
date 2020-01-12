@@ -27,8 +27,8 @@ steps:
   # Use AWK to select files that are too large 
   # The filesize saved by removing comments, editor data, unused elements etc should be no more than 20%
   # The filesize saved by optimizing the path should be no more than 50%. This limit is this high because some path optimizers mess up the output path.
-  - awk '${9%.*} > 20' ./minify_compact.txt | tee ./minify_toolarge.txt 1>/dev/null
-  - awk '${9%.*} > 50' ./minify_compact_path_opt.txt | tee ./minify_toolarge.txt 1>/dev/null
+  - awk '$9+0 > 20' ./minify_compact.txt | tee ./minify_toolarge.txt 1>/dev/null
+  - awk '$9+0 > 50' ./minify_compact_path_opt.txt | tee ./minify_toolarge.txt 1>/dev/null
   - ! grep -c % ./minify_toolarge.txt 1>/dev/null && echo "The following files can be shrunk down further!"
   - awk '{ print $1, $6, $7, $9 }' ./minify_toolarge.txt
   - if grep % ./minify_toolarge.txt 1>/dev/null; then exit 1; else exit 0; fi
