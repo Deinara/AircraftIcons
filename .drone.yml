@@ -11,7 +11,7 @@ steps:
   - npm install svgo
   - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
   - echo "$$COMMANDOUT"
-  - echo "$$COMMANDOUT" | tr ":\n" " "
+  - echo "$$COMMANDOUT" | tr ":\\n" " "
 
 - name: Generate preview page and badge
   image: node
