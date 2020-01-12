@@ -11,8 +11,13 @@ steps:
   - npm install svgo
   - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
   - echo "$$COMMANDOUT"
-  - export SINGLELINE=`echo "$$COMMANDOUT" | tr -d "\n"`
-  - echo "$$SINGLELINE"
+  - echo "$$COMMANDOUT" > ./minify_output.txt
+  - tr -d "\n" < ./minify_output.txt > ./minify_output.txt
+  - cat ./minify_output.txt
+ 
+ 
+ #- export SINGLELINE=`echo "$$COMMANDOUT" | tr -d "\n"`
+ # - echo "$$SINGLELINE"
   
   
   #| grep -Pzo \"([a-zA-Z0-9]+)\.svg\""
