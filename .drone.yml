@@ -14,19 +14,7 @@ steps:
   - paste -s -d ' ' ./minify_output.txt | tee ./minify_oneline.txt
   - grep -Po "([a-zA-Z0-9]+)\\.svg.+? - ([0-9\\.]{1,5})%.+?KiB" ./minify_oneline.txt | tee ./minify_compact.txt
   - awk '$9>25' ./minify_compact.txt | tee ./minify_toolarge.txt
-  - ! grep -c % ./minify_toolarge.txt
-  
-  
-  #- "tr -d \"\n\" < ./minify_output.txt > ./minify_output.txt"
-  #- cat ./minify_output.txt
- 
- 
- #- export SINGLELINE=`echo "$$COMMANDOUT" | tr -d "\n"`
- # - echo "$$SINGLELINE"
-  
-  
-  #| grep -Pzo \"([a-zA-Z0-9]+)\.svg\""
-  #P    "([a-zA-Z0-9]+)\.svg.+? - ([0-9\.]{1,5})%.+?KiB"
+  - ! grep -c % ./minify_toolarge.txt && exit 1
   
 - name: Generate preview page and badge
   image: node
