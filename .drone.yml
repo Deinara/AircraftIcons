@@ -6,15 +6,15 @@ steps:
 - name: Minify test
   image: node
   commands:
-  - mkdir minified 1>/dev/null
-  - npm init --force 
+  - mkdir minified
+  - npm init --force 1>/dev/null
   - npm install svgo
   - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
   - echo "$$COMMANDOUT" > ./minify_output.txt
   - paste -s -d ' ' ./minify_output.txt | tee ./minify_oneline.txt 1>/dev/null
   - grep -Po "([a-zA-Z0-9]+)\\.svg.+? - ([0-9\\.]{1,5})%.+?KiB" ./minify_oneline.txt | tee ./minify_compact.txt 1>/dev/null
   - awk '$9>25' ./minify_compact.txt | tee ./minify_toolarge.txt 1>/dev/null
-  - awk '$1 $6 $7 $9' ./minify_toolarge.txt
+  - awk '{ print $1, $6, $7, $9 }' ./minify_toolarge.txt
   - ! grep -c % ./minify_toolarge.txt && exit 1
   
 - name: Generate preview page and badge
