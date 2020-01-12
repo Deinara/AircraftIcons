@@ -16,7 +16,8 @@ steps:
   - awk '$9>90' ./minify_compact.txt | tee ./minify_toolarge.txt 1>/dev/null
   - ! grep -c % ./minify_toolarge.txt 1>/dev/null && echo "The following files can be shrunk down further!"
   - awk '{ print $1, $6, $7, $9 }' ./minify_toolarge.txt
-  - ! grep % ./minify_toolarge.txt 1>/dev/null && exit 1
+  #- ! grep % ./minify_toolarge.txt 1>/dev/null && exit 1
+  - if grep % ./minify_toolarge.txt; then exit 1; else exit 0; fi
   
 - name: Generate preview page and badge
   image: node
