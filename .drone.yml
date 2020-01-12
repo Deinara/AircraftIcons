@@ -9,6 +9,7 @@ steps:
   - npm init --force 1>/dev/null
   - npm install svgo
   - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
+  - rm -r minified
   - echo "$$COMMANDOUT" > ./minify_output.txt
   - paste -s -d ' ' ./minify_output.txt | tee ./minify_oneline.txt 1>/dev/null
   - grep -Po "([a-zA-Z0-9]+)\\.svg.+? - ([0-9\\.]{1,5})%.+?KiB" ./minify_oneline.txt | tee ./minify_compact.txt 1>/dev/null
@@ -26,8 +27,8 @@ steps:
   - npm init --force
   - npm install icon-font-generator
   - npm install gh-badges
-  #- npm run -s env -- icon-font-generator ./*/*.svg -o web -n AircraftIcons
-  #- npm run -s env -- badge icons $$NUMICONS :green svg > web/numicons.svg
+  - npm run -s env -- icon-font-generator ./*/*.svg -o web -n AircraftIcons
+  - npm run -s env -- badge icons $$NUMICONS :green svg > web/numicons.svg
   when:
     event:
     - push
@@ -46,8 +47,7 @@ steps:
   commands:
   - find ./web/ -type f -exec chmod 644 {} \;
   - find ./web/ -type d -exec chmod 755 {} \;
-  #./web/ here
-  - rsync -rpP --delete --delete-excluded ./ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/AircraftIcons/$$DRONE_BRANCH/
+  - rsync -rpP --delete --delete-excluded ./web/ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/AircraftIcons/$$DRONE_BRANCH/
   when:
     event:
     - push
