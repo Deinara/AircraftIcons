@@ -12,8 +12,7 @@ steps:
   - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
   - echo "$$COMMANDOUT" > ./minify_output.txt
   - paste -s -d ' ' ./minify_output.txt | tee ./minify_oneline.txt
-  - export COMPACTOUT=$(grep -Po "([a-zA-Z0-9]+)\\.svg.+? - ([0-9\\.]{1,5})%.+?KiB" ./minify_oneline.txt)
-  - echo "$$COMPACTOUT"
+  - grep -Po "([a-zA-Z0-9]+)\\.svg.+? - ([0-9\\.]{1,5})%.+?KiB" ./minify_oneline.txt | tee ./minify_compact.txt
   
   
   #- "tr -d \"\n\" < ./minify_output.txt > ./minify_output.txt"
