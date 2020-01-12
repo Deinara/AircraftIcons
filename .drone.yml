@@ -11,7 +11,11 @@ steps:
   - npm install svgo
   - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
   - echo "$$COMMANDOUT"
-  - "echo \"$$COMMANDOUT\" | tr -d \"\n\" | grep -Pzo \"([a-zA-Z0-9]+)\.svg\""
+  - SINGLELINE=$("echo \"$$COMMANDOUT\" | tr -d \"\n\"" ) && export SINGLELINE
+  - echo "$$SINGLELINE"
+  
+  
+  #| grep -Pzo \"([a-zA-Z0-9]+)\.svg\""
   #P    "([a-zA-Z0-9]+)\.svg.+? - ([0-9\.]{1,5})%.+?KiB"
   
 - name: Generate preview page and badge
