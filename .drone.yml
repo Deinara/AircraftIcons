@@ -5,15 +5,31 @@ steps:
 - name: Minify test
   image: node
   commands:
-  - mkdir minified
   - npm init --force 1>/dev/null
   - npm install svgo
-  - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
+  
+  # Create the minified svg files and capture the output
+  - mkdir minified
+  - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst,convertPathData ) && export COMMANDOUT
+  - rm -r minified && mkdir minified
+  - COMMANDOUTPATHOPT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUTPATHOPT
   - rm -r minified
   - echo "$$COMMANDOUT" > ./minify_output.txt
+  - echo "$$COMMANDOUTPATHOPT" > ./minify_output_path_opt.txt
+  
+  # Convert the output to one line
   - paste -s -d ' ' ./minify_output.txt | tee ./minify_oneline.txt 1>/dev/null
-  - grep -Po "([a-zA-Z0-9]+)\\.svg.+? - ([0-9\\.]{1,5})%.+?KiB" ./minify_oneline.txt | tee ./minify_compact.txt 1>/dev/null
-  - awk '$9>25' ./minify_compact.txt | tee ./minify_toolarge.txt 1>/dev/null
+  - paste -s -d ' ' ./minify_output_path_opt.txt | tee ./minify_oneline_path_opt.txt 1>/dev/null
+  
+  # Use REGEX to find the files and their compression ratios
+  - grep -Po "([a-zA-Z0-9]+)\\.svg.+? - ([0-9]{1,5})[0-9\\.]{0,2}%.+?KiB" ./minify_oneline.txt | tee ./minify_compact.txt 1>/dev/null
+  - grep -Po "([a-zA-Z0-9]+)\\.svg.+? - ([0-9]{1,5})[0-9\\.]{0,2}%.+?KiB" ./minify_oneline_path_opt.txt | tee ./minify_compact_path_opt.txt 1>/dev/null
+  
+  # Use AWK to select files that are too large 
+  # The filesize saved by removing comments, editor data, unused elements etc should be no more than 15%
+  # The filesize saved by optimizing the path should be no more than 40%. This limit is this high because some path optimizers mess up the output path.
+  - awk '$9+0 > 15' ./minify_compact.txt | tee ./minify_toolarge.txt 1>/dev/null
+  - awk '$9+0 > 40' ./minify_compact_path_opt.txt | tee -a ./minify_toolarge.txt 1>/dev/null
   - ! grep -c % ./minify_toolarge.txt 1>/dev/null && echo "The following files can be shrunk down further!"
   - awk '{ print $1, $6, $7, $9 }' ./minify_toolarge.txt
   - if grep % ./minify_toolarge.txt 1>/dev/null; then exit 1; else exit 0; fi
