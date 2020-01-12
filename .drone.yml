@@ -2,6 +2,21 @@ kind: pipeline
 name: default
 
 steps:
+- name: Minify test
+  image: node
+  commands:
+  - mkdir minified
+  - npm init --force 1>/dev/null
+  - npm install svgo
+  - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
+  - echo "$$COMMANDOUT" > ./minify_output.txt
+  - paste -s -d ' ' ./minify_output.txt | tee ./minify_oneline.txt 1>/dev/null
+  - grep -Po "([a-zA-Z0-9]+)\\.svg.+? - ([0-9\\.]{1,5})%.+?KiB" ./minify_oneline.txt | tee ./minify_compact.txt 1>/dev/null
+  - awk '$9>25' ./minify_compact.txt | tee ./minify_toolarge.txt 1>/dev/null
+  - ! grep -c % ./minify_toolarge.txt 1>/dev/null && echo "The following files can be shrunk down further!"
+  - awk '{ print $1, $6, $7, $9 }' ./minify_toolarge.txt
+  - if grep % ./minify_toolarge.txt 1>/dev/null; then exit 1; else exit 0; fi
+  
 - name: Generate preview page and badge
   image: node
   commands:
@@ -11,8 +26,8 @@ steps:
   - npm init --force
   - npm install icon-font-generator
   - npm install gh-badges
-  - npm run -s env -- icon-font-generator ./*/*.svg -o web -n AircraftIcons
-  - npm run -s env -- badge icons $$NUMICONS :green svg > web/numicons.svg
+  #- npm run -s env -- icon-font-generator ./*/*.svg -o web -n AircraftIcons
+  #- npm run -s env -- badge icons $$NUMICONS :green svg > web/numicons.svg
   when:
     event:
     - push
@@ -31,7 +46,8 @@ steps:
   commands:
   - find ./web/ -type f -exec chmod 644 {} \;
   - find ./web/ -type d -exec chmod 755 {} \;
-  - rsync -rpP --delete --delete-excluded ./web/ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/AircraftIcons/$$DRONE_BRANCH/
+  #./web/ here
+  - rsync -rpP --delete --delete-excluded ./ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/AircraftIcons/$$DRONE_BRANCH/
   when:
     event:
     - push
