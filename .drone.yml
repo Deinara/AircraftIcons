@@ -11,7 +11,6 @@ steps:
   - npm install svgo
   - npm run -s env -- svgo -f ./ -r -o ./minified
 
-steps:
 - name: Generate preview page and badge
   image: node
   commands:
