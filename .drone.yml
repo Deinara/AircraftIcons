@@ -9,7 +9,7 @@ steps:
   - mkdir minified
   - npm init --force
   - npm install svgo
-  - npm run -s env -- svgo --disable=cleanupAttrs,removeDoctype,removeXMLProcInst,removeMetadata --pretty -f ./ -r -o ./minified 
+  - npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst 
 
 - name: Generate preview page and badge
   image: node
