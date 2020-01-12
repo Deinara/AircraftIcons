@@ -12,6 +12,7 @@ steps:
   - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
   - echo "$$COMMANDOUT"
   - echo "$$COMMANDOUT" > ./minify_output.txt
+  - paste -s -d ' ' ./minify_output.txt
   #- "tr -d \"\n\" < ./minify_output.txt > ./minify_output.txt"
   #- cat ./minify_output.txt
  
