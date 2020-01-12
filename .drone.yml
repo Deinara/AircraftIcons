@@ -9,7 +9,9 @@ steps:
   - mkdir minified
   - npm init --force
   - npm install svgo
-  - npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst 
+  - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
+  - echo "$$COMMANDOUT"
+  - echo "$$COMMANDOUT" | grep %
 
 - name: Generate preview page and badge
   image: node
