@@ -13,7 +13,7 @@ steps:
   - echo "$$COMMANDOUT" > ./minify_output.txt
   - paste -s -d ' ' ./minify_output.txt | tee ./minify_oneline.txt 1>/dev/null
   - grep -Po "([a-zA-Z0-9]+)\\.svg.+? - ([0-9\\.]{1,5})%.+?KiB" ./minify_oneline.txt | tee ./minify_compact.txt 1>/dev/null
-  - awk '$9>90' ./minify_compact.txt | tee ./minify_toolarge.txt 1>/dev/null
+  - awk '$9>25' ./minify_compact.txt | tee ./minify_toolarge.txt 1>/dev/null
   - ! grep -c % ./minify_toolarge.txt 1>/dev/null && echo "The following files can be shrunk down further!"
   - awk '{ print $1, $6, $7, $9 }' ./minify_toolarge.txt
   #- ! grep % ./minify_toolarge.txt 1>/dev/null && exit 1
