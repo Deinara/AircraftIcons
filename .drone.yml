@@ -11,7 +11,7 @@ steps:
   - npm install svgo
   - COMMANDOUT=$(npm run -s env -- svgo -f ./ -r -o ./minified --pretty --disable=removeDoctype,removeXMLProcInst ) && export COMMANDOUT
   - echo "$$COMMANDOUT"
-  - echo "$$COMMANDOUT" | tr -d "\\n" | grep -z %
+  - "echo \"$$COMMANDOUT\" | tr -d \"\n\" | grep -z %"
   #P    "([a-zA-Z0-9]+)\.svg.+? - ([0-9\.]{1,5})%.+?KiB"
 
 - name: Generate preview page and badge
