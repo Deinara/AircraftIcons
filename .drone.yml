@@ -1,6 +1,16 @@
 kind: pipeline
 name: default
 
+
+steps:
+- name: Minify test
+  image: node
+  commands:
+  - mkdir minified
+  - npm init --force
+  - npm install svgo
+  - npm run -s env -- svgo -f ./ -r -o ./minified
+
 steps:
 - name: Generate preview page and badge
   image: node
