@@ -75,6 +75,8 @@ steps:
   - find ./web/ -type f -exec chmod 644 {} \;
   - find ./web/ -type d -exec chmod 755 {} \;
   - rsync -rpP --delete --delete-excluded ./web/ rsync://$$RSYNC_USER@$$RSYNC_URL:$$RSYNC_PORT/volume/AircraftIcons/$$DRONE_BRANCH/
+  # Purge github icon count
+  - curl -X PURGE https://camo.githubusercontent.com/861b97c3e4808129a914551ff755de6618d7cc4a/68747470733a2f2f64726f6e652e6465696e6172612e6e6c2f7765622f416972637261667449636f6e732f6d61737465722f6e756d69636f6e732e737667
   when:
     event:
     - push
