@@ -17,6 +17,7 @@ Please follow the contribution guidelines below:
 * Depict the aircraft from the side, as if they were parked/taxiing, i.e. with the gear extended.
 * The nose of the depicted aircraft should point left.
 * If multiple models fit the same ICAO identifier, use the most recently issued model. 
+* It could be that multiple aircraft can use the same icon, for example when only the engine is different. Don't include the icon twice, but add an entry in the 'duplicates.json' file. The format is "model ICAO code": "icon to use ICAO code".
 * Aircraft are not to scale compared to each other. Instead, use as much of the frame as possible while keeping a little margin, and not distorting the proportions of the model.
 * For uniformity, the 'ground level' the aircraft are standing on should be 10mm from the bottom.
 * The main focus lies on commercial and general aviation aircraft, but military aircraft can be added too.

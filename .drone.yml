@@ -45,6 +45,14 @@ steps:
     event:
     - pull_request
     
+- name: Copy duplicate icons
+  image: python:3
+  commands:
+  - python ./copy_icons.py
+  when:
+    event:
+    - push
+    
 - name: Generate preview page and badge
   image: node
   commands:
