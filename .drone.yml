@@ -52,6 +52,8 @@ steps:
   when:
     event:
     - push
+    branch:
+    -  master
     
 - name: Create release files
   image: acleancoder/imagemagick-full
@@ -66,6 +68,8 @@ steps:
   when:
     event:
     - push
+    branch:
+    -  master
     
 - name: Zip release files
   image: kramos/alpine-zip
@@ -76,6 +80,8 @@ steps:
   when:
     event:
     - push
+    branch:
+    -  master
 
 - name: Generate preview page and badge
   image: node
