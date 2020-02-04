@@ -63,6 +63,7 @@ steps:
   #- inkscape -V
   #- for file in ./*/*.svg; do inkscape -e release/png_small/$${file%svg}png -f $$file; done
   - for file in ./*/*.svg; do fileout=$${file##*/} && fileout=$${fileout%svg} && inkscape -e release/png_small/$${fileout}png -f $$file -w 250 -h 100; done
+  - mkdir -p ./web/release
   - cp -r ./release ./web/release
   when:
     event:
@@ -81,6 +82,7 @@ steps:
   #- inkscape -V
   #- for file in ./*/*.svg; do inkscape -e release/png_small/$${file%svg}png -f $$file; done
   #- for file in ./*/*.svg; do fileout=$${file##*/} && fileout=$${fileout%svg} && inkscape -e release/png_small/$${fileout}png -f $$file -w 250 -h 100; done
+  - mkdir -p ./web/release
   - cp -r ./release ./web/release
   when:
     event:
