@@ -67,6 +67,17 @@ steps:
   when:
     event:
     - push
+    
+- name: Create release files
+  image: node
+  commands:
+  - mkdir release && mkdir release/svg && mkdir release/png_small && mkdir release/png_large && mkdir release/bmp_vrc
+  - cp LICENSE.md release/license.txt
+  - cp ./*/*.svg release/svg
+  - cp ./release ./web
+  when:
+    event:
+    - push
 
 - name: Write preview files
   image: eeacms/rsync
