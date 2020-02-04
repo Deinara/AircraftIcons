@@ -69,7 +69,7 @@ steps:
     event:
     - push
     
-- name: Create release files
+- name: Zip release files
   image: kramos/alpine-zip
   commands:
   - mkdir -p ./web
