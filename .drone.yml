@@ -77,7 +77,7 @@ steps:
   - cp LICENSE.md release/license.txt
   - cp ./*/*.svg release/svg
   - npm init --force
-  - npm install svgexport
+  - npm install svgexport -g
   - for file in ./*/*.svg; do fileout=$${file##*/} && fileout=$${fileout%svg} && npm run -s env -- svgexport $$file release/png_small/$${fileout}png 250:100; done
   #- for file in *./*/*.svg; do inkscape $file -o release/png_small/${file%svg}png; done
   #- inkscape -V
