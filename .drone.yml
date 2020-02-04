@@ -70,15 +70,13 @@ steps:
     branch:
     -  master
 
-- name: Create release files NPM
-  image: node
+- name: Create release files IMAGEMAGICK
+  image: acleancoder/imagemagick-full
   commands:
   - mkdir release && mkdir release/svg && mkdir release/png_small && mkdir release/png_large && mkdir release/bmp_vrc
   - cp LICENSE.md release/license.txt
   - cp ./*/*.svg release/svg
-  - npm init --force
-  - npm install svgexport -g
-  - for file in ./*/*.svg; do fileout=$${file##*/} && fileout=$${fileout%svg} && npm run -s env -- svgexport $$file release/png_small/$${fileout}png 250:100; done
+  - for file in ./*/*.svg; do fileout=$${file##*/} && fileout=$${fileout%svg} && convert -density 1200 -resize 250x100 $$file release/png_small/$${fileout}png; done
   #- for file in *./*/*.svg; do inkscape $file -o release/png_small/${file%svg}png; done
   #- inkscape -V
   #- for file in ./*/*.svg; do inkscape -e release/png_small/$${file%svg}png -f $$file; done
