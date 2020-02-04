@@ -73,7 +73,7 @@ steps:
   commands:
   - NUMICONS=$(find .//./*/*.svg -name 'supporting' -o -name '.git' -prune -o -print | grep -c //) && export NUMICONS
   - echo "Icons found $$NUMICONS"
-  - mkdir web
+  - mkdir -p web
   - npm init --force
   - npm install icon-font-generator
   - npm install gh-badges
