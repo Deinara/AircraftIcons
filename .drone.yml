@@ -52,13 +52,43 @@ steps:
   when:
     event:
     - push
+    branch:
+    -  master
     
+- name: Create release files
+  image: acleancoder/imagemagick-full
+  commands:
+  - mkdir release && mkdir release/svg && mkdir release/png_small && mkdir release/png_large && mkdir release/bmp_vrc
+  - cp LICENSE.md release/license.txt
+  - cp ./*/*.svg release/svg
+  - for file in ./*/*.svg; do fileout=$${file##*/} && fileout=$${fileout%svg} && convert -density 200 -resize 250x100 $$file release/png_small/$${fileout}png ; done
+  - for file in ./*/*.svg; do fileout=$${file##*/} && fileout=$${fileout%svg} && convert -density 200 -resize 750x300 $$file release/png_large/$${fileout}png ; done
+  - for file in ./*/*.svg; do fileout=$${file##*/} && fileout=$${fileout%svg} && convert -density 100 -resize 85x20 -gravity center -extent 85x20 $$file release/bmp_vrc/$${fileout}bmp ; done
+  #- for file in ./*/*.svg; do fileout=$${file##*/} && fileout=$${fileout%svg} && inkscape -e release/png_small/$${fileout}png -f $$file -w 250 -h 100; done
+  when:
+    event:
+    - push
+    branch:
+    -  master
+    
+- name: Zip release files
+  image: kramos/alpine-zip
+  commands:
+  - mkdir -p ./web
+  - cd release
+  - zip -r ../web/AircraftIcons.zip ./*
+  when:
+    event:
+    - push
+    branch:
+    -  master
+
 - name: Generate preview page and badge
   image: node
   commands:
   - NUMICONS=$(find .//./*/*.svg -name 'supporting' -o -name '.git' -prune -o -print | grep -c //) && export NUMICONS
   - echo "Icons found $$NUMICONS"
-  - mkdir web
+  - mkdir -p web
   - npm init --force
   - npm install icon-font-generator
   - npm install gh-badges
