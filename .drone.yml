@@ -60,7 +60,7 @@ steps:
   - cp LICENSE.md release/license.txt
   - cp ./*/*.svg release/svg
   #- for file in *./*/*.svg; do inkscape $file -o release/png_small/${file%svg}png; done
-  - for file in *./*/*.svg; do inkscape --export-type="png" --export-filename=release/png_small/${file%svg}png $file; done
+  - for file in *./*/*.svg; do inkscape --export-filename=release/png_small/$${file%svg}png $$file; done
   - cp -r ./release ./web
   when:
     event:
