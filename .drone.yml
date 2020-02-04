@@ -71,7 +71,8 @@ steps:
   image: kramos/alpine-zip
   commands:
   - mkdir -p ./web
-  - zip -r ./web/AircraftIcons.zip release/*
+  - cd release
+  - zip -r ../web/AircraftIcons.zip ./*
   when:
     event:
     - push
