@@ -56,7 +56,7 @@ steps:
 - name: Create release files
   image: acleancoder/imagemagick-full
   commands:
-  - apt install zip -y
+  - "apt install zip -y"
   - mkdir release && mkdir release/svg && mkdir release/png_small && mkdir release/png_large && mkdir release/bmp_vrc
   - cp LICENSE.md release/license.txt
   - cp ./*/*.svg release/svg
