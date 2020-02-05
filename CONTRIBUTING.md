@@ -14,7 +14,7 @@ Please follow the contribution guidelines below:
 * Please use the aircraft codes as specified in the ICAO8643 document as filename convention.
 * The filenames use capital letters.
 * The icon should consist of a solid black surface following the profile of the aircraft, with cutouts for windows only. No internals should be drawn.
-* Depict the aircraft from the side, as if they were parked/taxiing, i.e. with the gear extended.
+* Depict the aircraft from the side, as if they were parked/taxiing. That means: Gear extended, flaps retracted, wingtips folded up, rotor stationary, etc.
 * The nose of the depicted aircraft should point left.
 * If multiple models fit the same ICAO identifier, use the most recently issued model. 
 * It could be that multiple aircraft can use the same icon, for example when only the engine is different. Don't include the icon twice, but add an entry in the 'duplicates.json' file. The format is "model ICAO code": "icon to use ICAO code".
