@@ -16,7 +16,7 @@ Please follow the contribution guidelines below:
     * The format is `"model ICAO code": "icon to use ICAO code"`.
 * If an icon is not created or missing for any reason but there is an icon availabile that closely resembles the aircraft model, add an entry in the 'placeholders.json' file.
     * The format is `"model ICAO code": "icon to use ICAO code"`.
-    * It is always preferable to have a unique icon instead of a placeholder
+    * It is always preferable to have a unique icon instead of a placeholder.
 * The main focus lies on commercial and general aviation aircraft, but military aircraft could be added too.
 * Please do not use copyrighted work.
 
