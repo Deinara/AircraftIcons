@@ -45,10 +45,11 @@ steps:
     event:
     - pull_request
 
-- name: Test JSON duplicates file
+- name: Test JSON files
   image: cytopia/jsonlint
   commands:
   - jsonlint ./duplicates.json
+  - jsonlint ./placeholders.json
   when:
     event:
     - push
