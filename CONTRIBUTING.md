@@ -17,10 +17,12 @@ Please follow the contribution guidelines below:
 * Depict the aircraft from the side, as if they were parked/taxiing. That means: Gear extended, flaps retracted, wingtips folded up, rotor stationary, etc.
 * The nose of the depicted aircraft should point left.
 * If multiple models fit the same ICAO identifier, use the most recently issued model. 
-* It could be that multiple aircraft can use the same icon, for example when only the engine is different. Do not include the icon twice, but add an entry in the 'duplicates.json' file. The format is "model ICAO code": "icon to use ICAO code".
 * Aircraft are not to scale compared to each other. Instead, use as much of the frame as possible while keeping a little margin, and not distorting the proportions of the model.
 * For uniformity, the 'ground level' the aircraft are standing on should be 10mm from the bottom.
 * The main focus lies on commercial and general aviation aircraft, but military aircraft can be added too.
+* It could be that multiple aircraft can use the same icon, for example when only the engine is different. Do not include the icon twice, but add an entry in the 'duplicates.json' file. The format is "model ICAO code": "icon to use ICAO code".
+* If an icon is not created or missing for any reason but there is an icon availabile that closely resembles the aircraft, add an entry in the 'placeholders.json' file. The format is "model ICAO code": "icon to use ICAO code". Of course, try not to do this in favour of adding a unique model!
 * Run your svg file through an svg optimizer, and please ensure the image looks the same afterwards.
 * Please do not use copyrighted work.
 * Where feasible, please create a pull request for one aircraft (range) at a time, e.g. B732 - B739.
+

@@ -14,6 +14,9 @@ def find(pattern, path):
 def load():
     with open(duplicatefile, 'r') as JSON:
         json_dict = json.load(JSON)
+    with open(placeholderfile, 'r') as JSON:
+        json_dict_2 = json.load(JSON)
+    json_dict.update(json_dict_2)
     return json_dict
     
 def copy():
@@ -33,6 +36,7 @@ def copy():
         print("")
 
 
-duplicatefile = './duplicates.json'  
+duplicatefile = './duplicates.json'
+placeholderfile = './placeholders.json'
 
 copy()
