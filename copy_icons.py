@@ -13,11 +13,11 @@ def find(pattern, path):
 
 def load():
     with open(duplicatefile, 'r') as JSON:
-        json_dict = json.load(JSON)
+        copy_dict = json.load(JSON)
     with open(placeholderfile, 'r') as JSON:
-        json_dict_2 = json.load(JSON)
-    json_dict.update(json_dict_2)
-    return json_dict
+        copy_dict_add = json.load(JSON)
+    copy_dict.update(copy_dict_add)
+    return copy_dict
     
 def copy():
     duplicates = load()
