@@ -14,5 +14,15 @@ Please create an issue if you would like to request an aircraft type to be added
 
 [See all icons here](https://drone.deinara.nl/web/AircraftIcons/master/AircraftIcons.html)
 
+### Download
+The download contains the following files:
+* Original SVGs
+* Small PNGs (intended size)
+* Large PNGs
+* Tiny BMP files for use with Virtual Radar Client
+
+[Download files](https://drone.deinara.nl/web/AircraftIcons/master/AircraftIcons.zip)
+
+
 #### Licence:
 <img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" height="25">
